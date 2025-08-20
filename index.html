@@ -7,18 +7,20 @@
                 body {
                     font-family: "Helvetica Neue Light", "Helvetica Light", Helvetica, Arial, sans-serif;
                     text-align: center;
-                    background:
-                    linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
-                    url('background.jpg') no-repeat center center fixed;
-                    background-position: center center;
-                    background-size: cover;
-                    background-attachment: fixed;
                     margin: 0;
                     padding: 0;
                 }
+                .bg-fondo {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100vw;
+                  height: 100vh;
+                  object-fit: cover;
+                  z-index: -1;
+                }
                 @media (max-width: 768px) {
                     body {
-/*                         background-size: cover; */
                         background-position: center;
                     }
                 }
@@ -190,6 +192,7 @@
             </style>
     </head>
     <body>
+        <img src="background.jpg" class="bg-fondo" alt="Background">
         <!-- HERO section removed -->
         <section class="menu-header">
             <img src="logo.png" alt="Jalisco Fairway Logo" class="logo header-logo">
