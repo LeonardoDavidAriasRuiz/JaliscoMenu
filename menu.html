@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+            <title>Menú Jalisco Fairway</title>
+            <style>
+                body {
+                    font-family: "Helvetica Neue Light", "Helvetica Light", Helvetica, Arial, sans-serif;
+                    text-align: center;
+                    background:
+                    linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
+                    url('background.jpg') no-repeat center center fixed;
+                    background-size: cover;
+                    margin: 0;
+                    padding: 0;
+                }
+                h1 {
+                    font-family: "Helvetica Neue Light", "Helvetica Light", Helvetica, Arial, sans-serif;
+                    font-size: 48px;
+                    margin-bottom: 30px;
+                    text-shadow: 0 0 200px rgba(255,255,255,1), 0 0 20px rgba(255,255,255,0.8);
+                    display: inline-block;
+                }
+                .hero {
+                    display: flex;
+                    align-items: center;       /* centra verticalmente el texto con el logo */
+                    justify-content: center;   /* centra horizontalmente el grupo */
+                    gap: 28px;
+                    padding: 10px 0;
+                }
+                .hero h1 {
+                    margin: 0;
+                    font-size: 42px;
+                    text-shadow: 0 0 10px rgba(255,255,255,0.9);
+                }
+                .hero img.logo { margin-bottom: 0; }
+                .menu-header {
+                    margin: 20px auto 30px auto;
+                    max-width: 800px;
+                    text-align: center;
+                    padding: 20px;
+                    padding-left: 140px; /* espacio para el logo a la izquierda */
+                    padding-right: 140px;
+                    background: #fff;
+                    border-radius: 12px;
+                    box-shadow: 0 4px 30px rgba(0,0,0,0.15);
+                    border-bottom: 3px solid rgba(0,0,0,0.05);
+                    position: relative;
+                }
+                .menu-header h2 {
+                    margin: 0;
+                    font-size: 72px;
+                    font-weight: 600;
+                    letter-spacing: 2px;
+                    text-shadow: 0 0 15px rgba(255,255,255,1), 0 1px 0 rgba(0,0,0,0.12);
+                }
+                .menu-header .header-logo {
+                    position: absolute;
+                    left: 20px;              /* logo a la orilla de la tarjeta */
+                    top: 50%;
+                    transform: translateY(-50%);
+                    max-width: 100px;
+                    height: auto;
+                    margin: 0;
+                    border-radius: 50%;
+                    box-shadow: 0 0 200px rgba(255,255,255,1), 0 0 20px rgba(255,255,255,0.8);
+                }
+                img.logo {
+                    max-width: 200px; margin-bottom: 20px; border-radius: 100px;
+                    box-shadow: 0 0 200px rgba(255,255,255,1), 0 0 20px rgba(255,255,255,0.8);
+                }
+                .carousel {
+                    position: relative;
+                    margin: 20px auto;
+                    max-width: 700px;
+                    height: 400px;
+                    border-radius: 10px;
+                    box-shadow: 0 0 10px rgba(0,0,0,0.2);
+                    overflow: hidden;
+                }
+                .slides {
+                    display: flex;
+                    height: 100%;
+                    transition: transform 0.5s ease-in-out;
+                    will-change: transform;
+                }
+                .slide {
+                    min-width: 100%;
+                    flex: 0 0 100%;
+                    height: 100%;
+                    background-size: cover;
+                    background-position: center;
+                    flex-shrink: 0;
+                }
+                .arrow {
+                    position: absolute;
+                    top: 50%;
+                    transform: translateY(-50%);
+                    font-size: 30px;
+                    color: rgba(255,255,255,0.8);
+                    background-color: rgba(0,0,0,0.3);
+                    border-radius: 50%;
+                    width: 40px;
+                    height: 40px;
+                    line-height: 40px;
+                    text-align: center;
+                    cursor: pointer;
+                    user-select: none;
+                    z-index: 10;
+                }
+                .arrow:hover {
+                    background-color: rgba(0,0,0,0.6);
+                }
+                .prev {
+                    left: 10px;
+                }
+                .next {
+                    right: 10px;
+                }
+                .dots {
+                    position: absolute;
+                    bottom: 10px;
+                    width: 100%;
+                    text-align: center;
+                    z-index: 10;
+                }
+                .dot {
+                    display: inline-block;
+                    width: 12px;
+                    height: 12px;
+                    margin: 0 6px;
+                    background-color: rgba(255,255,255,0.6);
+                    border-radius: 50%;
+                    cursor: pointer;
+                    transition: background-color 0.3s ease;
+                }
+                .dot.active {
+                    background-color: rgba(255,255,255,1);
+                }
+                section {
+                    margin: 40px auto;
+                    max-width: 800px;
+                    text-align: left;
+                    padding: 20px;
+                    background: #fff;
+                    border-radius: 10px;
+                    box-shadow: 0 0 15px rgba(0,0,0,0.1);
+                }
+                section h2 {
+                    font-size: 32px;
+                    margin-bottom: 15px;
+                }
+                .section-desc {
+                    color: #777;
+                    font-size: 14px;
+                    margin: -5px 0 15px 0;
+                }
+                ul {
+                    list-style: none;
+                    padding: 0;
+                }
+                ul li {
+                    color: #666;
+                    font-size: 15px;
+                    margin: 10px 0;
+                    padding: 10px;
+                    border-bottom: 1px solid #eee;
+                    display: flex;
+                    align-items: center;
+                }
+                .platillo-text {
+                    flex: 3;
+                    padding-right: 20px;
+                }
+                .platillo-foto {
+                    flex: 1;
+                    height: 120px;
+                    background-color: #f0f0f0;
+                    border-radius: 8px;
+                    box-shadow: 0 0 8px rgba(0,0,0,0.08);
+                }
+            </style>
+    </head>
+    <body>
+        <!-- HERO section removed -->
+        <section class="menu-header">
+            <img src="logo.png" alt="Jalisco Fairway Logo" class="logo header-logo">
+                <h2>Menu</h2>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('brk1.jpg');"></div>
+                    <div class="slide" style="background-image: url('brk2.jpg');"></div>
+                    <div class="slide" style="background-image: url('brk3.jpg');"></div>
+                    <div class="slide" style="background-image: url('brk4.jpg');"></div>
+                    <div class="slide" style="background-image: url('brk5.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev">&#10094;</div>
+                <div class="arrow next" id="next">&#10095;</div>
+                <div class="dots" id="dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                </div>
+            </div>
+            <h2>Breakfast</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Breakfast Burrito</strong><br>Includes scrambled eggs, cheese, crispy potatoes, and your choice of meat. Meats include: Chorizo, Ham, etc.</div></li>
+                <li><div class="platillo-text"><strong>Huevos con Chorizo Plate</strong><br>Fluffy scrambled eggs with homemade chorizo. Served with a side of beans and rice. Choice of corn or flour tortillas.</div></li>
+                <li><div class="platillo-text"><strong>Huevos con Jamón Plate</strong><br>Scrambled eggs mixed with crispy ham. Served with rice and refried beans. Choice of corn or flour tortillas.</div></li>
+                <li><div class="platillo-text"><strong>Huevos Rancheros Plate</strong><br>Two sunny side up eggs on top of grilled bell peppers, topped with ranchero tomato sauce. Served with beans and rice.</div></li>
+                <li><div class="platillo-text"><strong>Huevos con Carne Plate</strong><br>Scrambled eggs mixed with tender steak, served with refried beans and rice. Choice of flour or corn tortillas.</div></li>
+                <li><div class="platillo-text"><strong>Chilaquiles Rojos</strong><br>Crispy tortilla chips with red sauce. Two sunny side up eggs on top. Served with rice, beans, cheese, lettuce, and sliced avocado.</div></li>
+                <li><div class="platillo-text"><strong>Chilaquiles Verdes</strong><br>Crispy tortilla chips with green sauce. Two sunny side up eggs on top. Served with rice, beans, lettuce, sour cream, and avocado.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="faj-carousel">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('faj1.jpg');"></div>
+                    <div class="slide" style="background-image: url('faj2.jpg');"></div>
+                    <div class="slide" style="background-image: url('faj3.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="faj-prev">&#10094;</div>
+                <div class="arrow next" id="faj-next">&#10095;</div>
+                <div class="dots" id="faj-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                </div>
+            </div>
+            <h2>Fajitas</h2>
+            <p class="section-desc">Meat, bell peppers &amp; onions. Rice, beans, lettuce, guacamole &amp; sour cream on the side. 4 tortillas.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>1 Meat Fajitas</strong><br>Your choice of a single meat: grilled chicken, beef, or shrimp, seasoned to perfection. Served with sautéed veggies.</div></li>
+                <li><div class="platillo-text"><strong>2 Meat Fajitas</strong><br>A sizzling mix of 2 of your choice of meats: grilled chicken, beef, or shrimp, seasoned to perfection. Served with sautéed veggies.</div></li>
+                <li><div class="platillo-text"><strong>3 Meat Fajitas</strong><br>A sizzling mix of your 3 choice of meats: grilled chicken, beef, and shrimp, seasoned to perfection. Served with sautéed veggies.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="plates-carousel">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('pl1.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl2.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl3.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl4.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl5.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl6.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl7.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl8.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl9.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl10.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl11.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl12.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl13.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl14.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl15.jpg');"></div>
+                    <div class="slide" style="background-image: url('pl16.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="plates-prev">&#10094;</div>
+                <div class="arrow next" id="plates-next">&#10095;</div>
+                <div class="dots" id="plates-dots">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                    <span class="dot" data-index="5"></span>
+                    <span class="dot" data-index="6"></span>
+                    <span class="dot" data-index="7"></span>
+                    <span class="dot" data-index="8"></span>
+                    <span class="dot" data-index="9"></span>
+                    <span class="dot" data-index="10"></span>
+                    <span class="dot" data-index="11"></span>
+                    <span class="dot" data-index="12"></span>
+                    <span class="dot" data-index="13"></span>
+                    <span class="dot" data-index="14"></span>
+                    <span class="dot" data-index="15"></span>
+                </div>
+            </div>
+            <h2>Plates</h2>
+            <p class="section-desc">served with rice, bean, lettuce, tomatoes, and cheese.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>2 Enchiladas Plate</strong><br>Two corn tortillas stuffed with your choice of meat or cheese, smothered in savory sauce. Served with sides.</div></li>
+                <li><div class="platillo-text"><strong>4 Flautas Plate</strong><br>Four golden-fried rolled tortillas stuffed with choice of meat. Comes with sour cream and guacamole.</div></li>
+                <li><div class="platillo-text"><strong>2 Crispy Taco Plate</strong><br>Two crispy tacos with choice of meat, topped with lettuce, cheese and salsa.</div></li>
+                <li><div class="platillo-text"><strong>Carne Asada Plate</strong><br>Tender grilled steak served with grilled onions, avocado slices and jalapeños.</div></li>
+                <li><div class="platillo-text"><strong>2 Tacos Plate</strong><br>Two tacos with choice of meat. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Chimichanga Plate</strong><br>A crispy, golden-fried burrito filled with your choice of meat, cheese and beans. Topped with sour cream.</div></li>
+                <li><div class="platillo-text"><strong>Enchilada &amp; Chile Relleno</strong><br>One enchilada and one chile relleno with your choice of sauce and cheese.</div></li>
+                <li><div class="platillo-text"><strong>Grilled Chicken Plate</strong><br>Succulently marinated grilled chicken, served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>2 Quesabirria Plate</strong><br>Two crispy quesabirrias with melted cheese and tender birria, served with consomé.</div></li>
+                <li><div class="platillo-text"><strong>Enchilada &amp; Tamale Plate</strong><br>One enchilada paired with a savory tamale and your choice of sauce.</div></li>
+                <li><div class="platillo-text"><strong>1 Enchilada Plate</strong><br>Single enchilada with red or green sauce, topped with cheese. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Steak Ranchero Plate</strong><br>Grilled steak smothered in a spicy ranchero sauce with grilled jalapeños and peppers.</div></li>
+                <li><div class="platillo-text"><strong>1 Chile Relleno Plate</strong><br>A large batter‑fried poblano pepper stuffed with queso fresco, served over savory tomato sauce. Includes rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Tamale &amp; Chile Relleno Plate</strong><br>One corn tamale with your choice of red or green sauce paired with a chile relleno. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Burrito Plate</strong><br>Your choice of one of our delicious burritos. Comes with rice, beans, lettuce and tomato on the side.</div></li>
+                <li><div class="platillo-text"><strong>Alambres Plate</strong><br>Grilled carne asada with mixed bell peppers, onions and bacon, topped with melted cheese. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Chile Verde Plate</strong><br>Tender pork simmered in tangy green tomatillo sauce. Served with rice, beans and tortillas.</div></li>
+                <li><div class="platillo-text"><strong>Birria Plate</strong><br>Slow‑cooked beef in a robust blend of chiles and spices. Served with consomé, rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>1 Tamale Plate</strong><br>One soft, steamed tamale (red or green sauce), choice of pork or chicken. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>1 Taco &amp; Enchilada Plate</strong><br>One taco (choice of meat) paired with one enchilada (red or green sauce). Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>1 Taco Plate</strong><br>One soft corn tortilla taco with choice of meat, topped with cilantro and onion. Served with a side of rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Tostada Plate</strong><br>Crisp flat corn tortilla topped with your choice of meat, lettuce, pico de gallo and crema. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>2 Shrimp Tacos Plate</strong><br>Two shrimp tacos with delicate seasoning and colorful slaw, finished with chipotle sauce. Served with lime wedge, rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>2 Fish Tacos</strong><br>Two flaky white‑fish tacos topped with slaw and drizzle. Served with rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Milanesa Plate</strong><br>Tender breaded beef cutlet fried to golden perfection. Served with salad, rice and beans.</div></li>
+                <li><div class="platillo-text"><strong>Carnitas Plate</strong><br>Slow‑cooked tender pork, shredded and crisped to perfection. Served with rice, beans and tortillas.</div></li>
+                <li><div class="platillo-text"><strong>Taco &amp; Relleno Plate</strong><br>Warm small taco with choice of meat, alongside a fire‑roasted poblano pepper stuffed with a blend of melted cheese.</div></li>
+                <li><div class="platillo-text"><strong>Choice of Meat Plate</strong><br>Choice of one of our flavorful meats. Served with rice, refried beans, and garnished with fresh salad and tomato.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-burritos">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('bur1.jpg');"></div>
+                    <div class="slide" style="background-image: url('bur2.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-burritos">&#10094;</div>
+                <div class="arrow next" id="next-burritos">&#10095;</div>
+                <div class="dots" id="dots-burritos">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+            <h2>Burritos</h2>
+            <p class="section-desc">Choice of meat: carne asada steak, pollo chicken, carnitas fried pork, pastor BBQ pork, chile verde pork stew, tripa tripe. Except on the Bean &amp; Cheese Burrito.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>Super Burrito</strong><br>Choice of meat, Mexican rice, beans, melted cheese, sour cream, guacamole, and Mexican salsa; wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Super Wet Burrito</strong><br>Oversized flour tortilla brimming with your choice of meat, beans, and cheese, plus rice, sour cream and guacamole; topped with house red or green sauce.</div></li>
+                <li><div class="platillo-text"><strong>Burrito Special</strong><br>Choice of meat, Mexican rice, beans, cheese, and sour cream; all wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Regular Burrito</strong><br>Choice of meat with rice, beans and Mexican salsa; all wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Jalisco Burrito</strong><br>Choice of meat, beans, cheese, avocado and Mexican salsa; wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Burrito Mary Tierra (Meat &amp; Shrimp)</strong><br>Combination of your choice of meat with zesty shrimp, rice, beans, cheese, sour cream, guacamole and Mexican salsa; perfectly wrapped.</div></li>
+                <li><div class="platillo-text"><strong>Bean and Cheese Burrito</strong><br>A warm flour tortilla filled with a blend of beans and melted cheese.</div></li>
+                <li><div class="platillo-text"><strong>Fairway Burrito</strong><br>Choice of meat, rice, beans and melted cheese; wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Veggie Burrito</strong><br>Mexican rice, beans, melted cheese, sour cream, fresh guacamole, Mexican salsa and crispy lettuce; wrapped in a soft flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Burrito de Camarón</strong><br>Grilled shrimp burrito with beans, cheese, sour cream, guacamole and pico de gallo.</div></li>
+                <li><div class="platillo-text"><strong>Chimichanga A la Cart</strong><br>Golden‑fried flour tortilla filled with your choice of meat, cheese and refried beans inside; topped with house sauce.</div></li>
+                <li><div class="platillo-text"><strong>Fish Burrito</strong><br>Perfectly grilled basa fish with Mexican rice, beans, cheese, sour cream, guacamole and Mexican salsa.</div></li>
+                <li><div class="platillo-text"><strong>Breakfast Burrito</strong><br>Scrambled eggs, cheese, crispy potatoes and your choice of meat (Chorizo, Ham, etc.).</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-bowls">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('bowl1.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-bowls">&#10094;</div>
+                <div class="arrow next" id="next-bowls">&#10095;</div>
+                <div class="dots" id="dots-bowls">
+                    <span class="dot active" data-index="0"></span>
+                </div>
+            </div>
+            <h2>Burrito Bowls</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Regular Bowl</strong><br>Choice of meat with Mexican rice, beans, and fresh Mexican salsa.</div></li>
+                <li><div class="platillo-text"><strong>Super Burrito Bowl</strong><br>Select your favorite meat, paired with Mexican rice, beans, shredded cheese, and fresh toppings.</div></li>
+                <li><div class="platillo-text"><strong>Burrito Bowl</strong><br>Your choice of meat with Mexican rice, black beans, avocado slices, shredded cheese and fresh toppings.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-quesadillas">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('que1.jpg');"></div>
+                    <div class="slide" style="background-image: url('que2.jpg');"></div>
+                    <div class="slide" style="background-image: url('que3.jpg');"></div>
+                    <div class="slide" style="background-image: url('que4.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-quesadillas">&#10094;</div>
+                <div class="arrow next" id="next-quesadillas">&#10095;</div>
+                <div class="dots" id="dots-quesadillas">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                </div>
+            </div>
+            <h2>Quesadillas</h2>
+            <p class="section-desc">Served with lettuce, guacamole, and sour cream. Choice of meat: carne asada steak, pollo chicken, carnitas fried pork, pastor BBQ pork, chile verde pork stew.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>Super Nachos</strong><br>House‑made crispy tortilla chips topped with choice of meat, beans, cheese, sour cream, guacamole and Mexican salsa.</div></li>
+                <li><div class="platillo-text"><strong>Super Quesadilla</strong><br>Generously sized quesadilla filled with your choice of meat, melted cheese and fresh veggies.</div></li>
+                <li><div class="platillo-text"><strong>Super Cheese Quesadilla</strong><br>Oversized flour tortilla with melting cheese. Served with a side of sour cream and guacamole.</div></li>
+                <li><div class="platillo-text"><strong>3 Quesabirrias</strong><br>Three shredded‑beef quesabirrias on crispy golden tortillas, paired with zesty lime, spicy jalapeños and consomé.</div></li>
+                <li><div class="platillo-text"><strong>Torta – Mexican Sandwich</strong><br>Soft toasted roll layered with tender choice of meat, avocado, sour cream, cheese, tomato and fresh lettuce.</div></li>
+                <li><div class="platillo-text"><strong>Super Veggie Nachos</strong><br>Crispy tortilla chips topped with beans, cheese, sour cream, guacamole and Mexican salsa.</div></li>
+                <li><div class="platillo-text"><strong>Quesadilla Mar y Tierra (Meat &amp; Shrimp)</strong><br>Grilled shrimp and tender steak with melted cheese in a golden flour tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Veggie Quesadilla</strong><br>Oversized flour tortilla filled with Mexican rice, beans, cheese, Mexican salsa, lettuce, sour cream and guacamole.</div></li>
+                <li><div class="platillo-text"><strong>Quesabirria A la Carta</strong><br>Flavorful shredded beef encased in a crispy golden tortilla, served with consomé and fresh lime.</div></li>
+                <li><div class="platillo-text"><strong>Steak Fries</strong><br>Perfectly fried golden fries topped with your choice of meat, cheese, sour cream, guacamole and salsa.</div></li>
+                <li><div class="platillo-text"><strong>Shrimp Quesadilla</strong><br>Succulent shrimp in a super‑sized golden flour tortilla with melted cheese. Served with fresh sides.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-tacos">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('taco1.jpg');"></div>
+                    <div class="slide" style="background-image: url('taco2.jpg');"></div>
+                    <div class="slide" style="background-image: url('taco3.jpg');"></div>
+                    <div class="slide" style="background-image: url('taco4.jpg');"></div>
+                    <div class="slide" style="background-image: url('taco5.jpg');"></div>
+                    <div class="slide" style="background-image: url('taco6.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-tacos">&#10094;</div>
+                <div class="arrow next" id="next-tacos">&#10095;</div>
+                <div class="dots" id="dots-tacos">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                    <span class="dot" data-index="5"></span>
+                </div>
+            </div>
+            <h2>Tacos</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Taco Salad</strong><br>Rice, beans, cheese, sour cream, lettuce, guacamole, and Mexican salsa.</div></li>
+                <li><div class="platillo-text"><strong>Small Taco</strong><br>Onions, cilantro, and salsa.</div></li>
+                <li><div class="platillo-text"><strong>Crispy Taco</strong><br>Cheese, lettuce, guacamole, and sour cream.</div></li>
+                <li><div class="platillo-text"><strong>2 Quesabirrias</strong><br>Two quesabirria tacos with juicy, slow‑cooked beef birria and melty cheese, encased in a crispy, griddled tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Quesabirria A la Carta</strong><br>Quesabirria taco with slow‑cooked beef birria and melted cheese in a crispy, griddled tortilla.</div></li>
+                <li><div class="platillo-text"><strong>Small Fish Taco</strong><br>Onions, cilantro, and salsa.</div></li>
+                <li><div class="platillo-text"><strong>Jalisco Taco</strong><br>Served in corn tortilla with beans, Mexican salsa, and sliced avocado.</div></li>
+                <li><div class="platillo-text"><strong>Veggie Taco</strong><br>Beans, rice, lettuce, Mexican salsa, cheese, guacamole, and sour cream.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-soups">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('soup1.jpg');"></div>
+                    <div class="slide" style="background-image: url('soup2.jpg');"></div>
+                    <div class="slide" style="background-image: url('soup3.jpg');"></div>
+                    <div class="slide" style="background-image: url('soup4.jpg');"></div>
+                    <div class="slide" style="background-image: url('soup5.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-soups">&#10094;</div>
+                <div class="arrow next" id="next-soups">&#10095;</div>
+                <div class="dots" id="dots-soups">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                </div>
+            </div>
+            <h2>Caldos – Soups</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Pozole</strong><br>Served with hominy and pork meat, garnished with onions, cabbage and radish. Tortillas on the side.</div></li>
+                <li><div class="platillo-text"><strong>Carne en su Jugo</strong><br>Traditional Mexican specialty: tender beef simmered in its own juices and spices, served hot.</div></li>
+                <li><div class="platillo-text"><strong>Coctel de Camarón</strong><br>Shrimp cocktail.</div></li>
+                <li><div class="platillo-text"><strong>7 Mares</strong><br>Seven‑seas soup with shrimp, crab, clams, scallops, fish and mixed vegetables like cauliflower, celery and broccoli.</div></li>
+                <li><div class="platillo-text"><strong>Birria Soup</strong><br>Mexican beef stew served in a bowl with onions and cilantro, with choice of tortillas on the side.</div></li>
+                <li><div class="platillo-text"><strong>Campechana Camarón y Pulpo</strong><br>Refreshing seafood cocktail featuring tender shrimp and octopus.</div></li>
+                <li><div class="platillo-text"><strong>Caldo de Camarón y Pescado</strong><br>Seafood soup that combines tender shrimp and fresh fish simmered in a fragrant broth.</div></li>
+                <li><div class="platillo-text"><strong>Caldo de Camarón</strong><br>Shrimp broth with shrimp, cauliflower, celery, broccoli and fish.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-tostadas">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('tost1.jpg');"></div>
+                    <div class="slide" style="background-image: url('tost2.jpg');"></div>
+                    <div class="slide" style="background-image: url('tost3.jpg');"></div>
+                    <div class="slide" style="background-image: url('tost4.jpg');"></div>
+                    <div class="slide" style="background-image: url('tost5.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-tostadas">&#10094;</div>
+                <div class="arrow next" id="next-tostadas">&#10095;</div>
+                <div class="dots" id="dots-tostadas">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                </div>
+            </div>
+            <h2>Tostadas</h2>
+            <p class="section-desc">Choice of meat: carne asada steak, pollo chicken, carnitas fried pork, pastor BBQ pork, chile verde pork stew.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>Bean Tostada</strong><br>Lettuce, guacamole, sour cream, Mexican salsa, and cheese.</div></li>
+                <li><div class="platillo-text"><strong>Shrimp Tostada</strong><br>Shrimp with lime, tomato, jalapeño, onion, cilantro, and sliced avocado.</div></li>
+                <li><div class="platillo-text"><strong>Ceviche Tostada</strong><br>Fish marinated with lime juice, jalapeño, red onion, carrots, topped with avocado slices.</div></li>
+                <li><div class="platillo-text"><strong>Mixta Tostada</strong><br>Shrimp and octopus with lime, tomato, onions, cilantro, and sliced avocado.</div></li>
+                <li><div class="platillo-text"><strong>Tostada</strong><br>Lettuce, guacamole, sour cream, Mexican salsa, and cheese.</div></li>
+                <li><div class="platillo-text"><strong>Octopus Tostada</strong><br>Octopus, Mexican sauce, lime, avocado slices.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-specials">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('spe1.jpg');"></div>
+                    <div class="slide" style="background-image: url('spe2.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-specials">&#10094;</div>
+                <div class="arrow next" id="next-specials">&#10095;</div>
+                <div class="dots" id="dots-specials">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                </div>
+            </div>
+            <h2>Specials</h2>
+            <p class="section-desc">Rice, beans, lettuce, tomato and cheese. Choice of corn or flour tortilla.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>Molcajete</strong><br>Molcajete bowl with Chicken, Steak, Shrimp, Chorizo and green salsa. Topped with green onions, fresh cheese and grilled jalapenos.</div></li>
+                <li><div class="platillo-text"><strong>Seafoods Molcajete</strong><br>Seafoods molcajete with options for crackers or tostada.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-seafood">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('sea1.jpg');"></div>
+                    <div class="slide" style="background-image: url('sea2.jpg');"></div>
+                    <div class="slide" style="background-image: url('sea3.jpg');"></div>
+                    <div class="slide" style="background-image: url('sea4.jpg');"></div>
+                    <div class="slide" style="background-image: url('sea5.jpg');"></div>
+                    <div class="slide" style="background-image: url('sea6.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-seafood">&#10094;</div>
+                <div class="arrow next" id="next-seafood">&#10095;</div>
+                <div class="dots" id="dots-seafood">
+                    <span class="dot active" data-index="0"></span>
+                    <span class="dot" data-index="1"></span>
+                    <span class="dot" data-index="2"></span>
+                    <span class="dot" data-index="3"></span>
+                    <span class="dot" data-index="4"></span>
+                    <span class="dot" data-index="5"></span>
+                </div>
+            </div>
+            <h2>Seafood</h2>
+            <p class="section-desc">Rice, beans, lettuce, tomato and cheese. Choice of corn or flour tortilla.</p>
+            <ul>
+                <li><div class="platillo-text"><strong>Mojarra Frita</strong><br>Fried tilapia fish.</div></li>
+                <li><div class="platillo-text"><strong>Shrimp Diabla</strong><br>Shrimp with hot sauce.</div></li>
+                <li><div class="platillo-text"><strong>Shrimp Kora</strong><br>Shrimp with special hot sauce.</div></li>
+                <li><div class="platillo-text"><strong>Mojarra Diabla</strong><br>Tilapia fish with hot sauce.</div></li>
+                <li><div class="platillo-text"><strong>Camarones Rancheros</strong><br>Shrimp in tomato sauce with bell peppers.</div></li>
+                <li><div class="platillo-text"><strong>Shrimp Ajo</strong><br>Garlic shrimp with bell peppers.</div></li>
+                <li><div class="platillo-text"><strong>Torre de Mariscos</strong><br>Seafood tower; layers of fresh shrimp, octopus, oysters, and clams, accompanied by avocado and cucumber.</div></li>
+                <li><div class="platillo-text"><strong>Mariscada</strong><br>Crab, scallops, green mussels, seafood mix, squids, shrimp, fish, octopus, vegan crab; choice of Kora or Diabla sauce.</div></li>
+                <li><div class="platillo-text"><strong>Mojarra Kora</strong><br>Tilapia fish with spicy salsa and lime.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>4 Kids</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Jr. Burrito</strong><br>Choice of meat, rice, beans and sour cream. 1 drink.</div></li>
+                <li><div class="platillo-text"><strong>Kids Quesadilla</strong><br>Cheese and choice of meat inside. Rice and beans on the side. 1 drink.</div></li>
+                <li><div class="platillo-text"><strong>Kids Cheese Quesadilla</strong><br>Cheese inside. Rice and beans on the side. 1 drink.</div></li>
+                <li><div class="platillo-text"><strong>Kids Taco</strong><br>Tortilla and choice of meat. Rice and beans on the side. 1 drink.</div></li>
+                <li><div class="platillo-text"><strong>Kids Enchilada</strong><br>Choice of meat inside. Enchilada sauce and cheese on top. Rice and beans on the side. 1 drink.</div></li>
+                <li><div class="platillo-text"><strong>Kids 2 Flautas</strong><br>Rolled tacos with tortilla and choice of meat inside. Rice, beans, lettuce, guacamole and sour cream on the side.</div></li>
+                <li><div class="platillo-text"><strong>Fast Burrito</strong><br>Beans and cheese only. 1 drink.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <h2>Desserts</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Churro</strong><br>Filled with caramel.</div></li>
+                <li><div class="platillo-text"><strong>Flan</strong><br>Classic caramel flan — smooth, creamy dessert with a luscious caramel topping.</div></li>
+                <li><div class="platillo-text"><strong>ChocoFlan</strong><br>Rich chocolate cake stacked with a creamy vanilla flan, dripped with delicate caramel sauce.</div></li>
+            </ul>
+        </section>
+        
+        <section>
+            <div class="carousel" id="carousel-sideorders">
+                <div class="slides">
+                    <div class="slide" style="background-image: url('side1.jpg');"></div>
+                </div>
+                <div class="arrow prev" id="prev-sideorders">&#10094;</div>
+                <div class="arrow next" id="next-sideorders">&#10095;</div>
+                <div class="dots" id="dots-sideorders">
+                    <span class="dot active" data-index="0"></span>
+                </div>
+            </div>
+            <h2>Side Orders</h2>
+            <ul>
+                <li><div class="platillo-text"><strong>Rice</strong><br>Flavorful rice dish prepared to perfection, an ideal complement to any meal.</div></li>
+                <li><div class="platillo-text"><strong>Beans</strong><br>Freshly simmered, seasoned beans, perfectly tender and flavorful.</div></li>
+                <li><div class="platillo-text"><strong>Fresh Guacamole</strong><br>Avocado, tomato, onions, cilantro, black pepper, salt, and lime.</div></li>
+                <li><div class="platillo-text"><strong>Chile Relleno</strong><br>Pasilla pepper filled with cheese and tomato sauce on top.</div></li>
+                <li><div class="platillo-text"><strong>Enchilada (1)</strong><br>Corn tortilla filled with choice of meat or only cheese. Topped with choice of red or green salsa.</div></li>
+                <li><div class="platillo-text"><strong>16 oz. Cup Salsa</strong><br>16 oz cup of your choice of salsa (salsa verde, tomato, tomatillo, salsa blanca, pico de gallo, habanero).</div></li>
+                <li><div class="platillo-text"><strong>Tamal</strong><br>Steamed corn masa filled with seasoned chicken, wrapped in a corn husk.</div></li>
+                <li><div class="platillo-text"><strong>Tortillas</strong><br>Warm tortillas to accompany your dish.</div></li>
+                <li><div class="platillo-text"><strong>24 oz. Cup Salsa</strong><br>24 oz cup of your choice of salsa (salsa verde, tomato, tomatillo, salsa blanca, pico de gallo, habanero).</div></li>
+                <li><div class="platillo-text"><strong>Sour Cream</strong><br>House‑made sour cream, a creamy and tangy complement to any dish.</div></li>
+                <li><div class="platillo-text"><strong>Cheese</strong><br>A side of cheese, typically including a blend of shredded or melted cheeses used in Mexican cuisine.</div></li>
+                <li><div class="platillo-text"><strong>32 oz. Cup of Salsa</strong><br>32 oz cup of your choice of salsa (salsa verde, tomato, tomatillo, salsa blanca, pico de gallo, habanero).</div></li>
+                <li><div class="platillo-text"><strong>Guacamole Blended</strong><br>Avocados smoothly blended with tomatoes, onions, cilantro, and a hint of lime juice.</div></li>
+                <li><div class="platillo-text"><strong>Sope</strong><br>Thick and consistent fried corn tortilla with beans, lettuce, sour cream, cheese, salsa and meat of your choice.</div></li>
+            </ul>
+        </section>
+        <script>
+            (function(){
+                function initCarousel(root){
+                    const slides = root.querySelector('.slides');
+                    const items  = slides ? slides.children : [];
+                    const prev   = root.querySelector('.prev');
+                    const next   = root.querySelector('.next');
+                    const dots   = root.querySelectorAll('.dot');
+                    const total  = items.length;
+                    if (!slides || total === 0) return;
+                    
+                    let idx = 0; let timer = null;
+                    
+                    function render(){
+                        slides.style.transform = 'translateX(' + (-idx * 100) + '%)';
+                        dots.forEach(d => d.classList.remove('active'));
+                        if (dots[idx]) dots[idx].classList.add('active');
+                    }
+                    function go(i){
+                        idx = (i % total + total) % total; // loop infinito basado en # de slides
+                        render();
+                    }
+                    function start(){
+                        stop();
+                        if (total > 1) timer = setInterval(() => go(idx + 1), 4000);
+                    }
+                    function stop(){ if (timer) { clearInterval(timer); timer = null; } }
+                    
+                    if (next) next.addEventListener('click', () => { stop(); go(idx + 1); start(); });
+                    if (prev) prev.addEventListener('click', () => { stop(); go(idx - 1); start(); });
+                    dots.forEach((d,i) => d.addEventListener('click', () => { stop(); go(i); start(); }));
+                    
+                    // Pausa en hover (en móviles no afecta)
+                    root.addEventListener('mouseenter', stop);
+                    root.addEventListener('mouseleave', start);
+                    
+                    go(0);
+                    start();
+                }
+                
+                // Inicializa todos los carruseles presentes, sin hardcodear IDs
+                document.querySelectorAll('.carousel').forEach(initCarousel);
+            })();
+        </script>
+    </body>
+</html>
