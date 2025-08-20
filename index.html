@@ -9,10 +9,18 @@
                     text-align: center;
                     background:
                     linear-gradient(rgba(255,255,255,0.3), rgba(255,255,255,0.3)),
-                    url('background.jpg') no-repeat center center fixed;
+                    background-image: url('background.jpg');
+                    background-repeat: no-repeat;
+                    background-position: center center;
                     background-size: cover;
+                    background-attachment: scroll;
                     margin: 0;
                     padding: 0;
+                }
+                @media (max-width: 768px) {
+                    body {
+                        background-attachment: scroll;
+                    }
                 }
                 h1 {
                     font-family: "Helvetica Neue Light", "Helvetica Light", Helvetica, Arial, sans-serif;
